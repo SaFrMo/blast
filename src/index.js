@@ -23,7 +23,7 @@ module.exports = class {
             customClass: options.customClass || '',
             generateIndexID: options.generateIndexID || false,
             generateValueClass: options.generateValueClass || false,
-            stripHTMLTags: options.stripHTMLTags || false,
+            // stripHTMLTags: options.stripHTMLTags || false, // not yet supported
             aria: options.hasOwnProperty('aria') ? options.aria : true,
             debug: options.debug || false
         }
@@ -34,7 +34,7 @@ module.exports = class {
         this.processedDelimiterRegex = processedDelimiters.delimiterRegex
 
         // map through elements
-        this.processElements()
+        this.processedElements = this.processElements()
 
         console.log(this)
 

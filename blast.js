@@ -296,22 +296,8 @@ export default function (el, options = {}) {
         //     $this.html(text);
         // }
 
-        /* If the browser throws an error for the provided element type (browers whitelist the letters and types of the elements they accept), fall back to using "span". */
-        try {
-            document.createElement(opts.tag);
-        } catch (error) {
-            opts.tag = "span";
 
-            if (opts.debug) console.log(NAME + ": Invalid tag supplied. Defaulting to span.");
-        }
 
-        /* For reference purposes when reversing Blast, assign the target element a root class. */
-        elem.classList.add(NAME + "-root");
-
-        /* Initiate the DOM traversal process. */
-        if (opts.debug) console.time(NAME);
-        traverseDOM(elem, opts);
-        if (opts.debug) console.timeEnd(NAME);
 
         /* If false is passed in as the first parameter, reverse Blast. */
         // } else if (options === false && $this.data(NAME) !== undefined) {
