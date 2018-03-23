@@ -18,16 +18,15 @@
     "dev": "NODE_ENV=dev webpack-dev-server --progress --config webpack.config.dev.js --open",
     "build": "webpack -p --progress --config webpack.config.build.js"
   },
-  "main": "dist/bundle.js",
-  "repository": "julianshapiro/blast",
+  "main": "dist/blast.min.js",
+  "repository": "safrmo/blast",
   "keywords": [
     "text",
     "parse",
     "typography",
     "search",
     "animation",
-    "jquery",
-    "zepto",
+    "vanilla",
     "character",
     "word",
     "sentence"

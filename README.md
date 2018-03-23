@@ -1,6 +1,4 @@
-## Blast (2.1.0)
-
-Vanilla version of Blast.js.
+Vanilla version of [Blast.js](http://velocityjs.org/blast/). Blast text apart to make it manipulable.
 
 ## Quickstart
 

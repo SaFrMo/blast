@@ -10,7 +10,7 @@ module.exports = Object.assign(webpackConfig, {
     output: {
         library: 'Blast',
         path: path.join(__dirname, 'dist'),
-        filename: '[name].js'
+        filename: 'blast.min.js'
     },
 
     plugins: webpackConfig.plugins.concat([
