@@ -43,6 +43,7 @@
         <div class="entry">
             <p>First paragraph</p>
             <p>Second paragraph</p>
+            <h2><a href="#">Test with</a> more complicated <ul><li>markup here</li><li>and here as well</li></ul></h2>
         </div>
     </div>
 
@@ -59,7 +60,9 @@
 <!-- for example, code to test the contents of bundle.js -->
 
 <script>
-    new Blast('.entry p')
+    new Blast('.entry > *', {
+        delimiter: 'character'
+    })
 </script>
 
 <!-- end post-bundle.js area -->

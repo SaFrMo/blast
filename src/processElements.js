@@ -1,5 +1,4 @@
 import getText from 'getText'
-import traverseDOM from 'traverseDOM'
 
 export default (elements, opts) => {
     return elements.map(elem => {
@@ -45,11 +44,6 @@ export default (elements, opts) => {
 
         /* For reference purposes when reversing Blast, assign the target element a root class. */
         elem.classList.add('blast-root');
-
-        /* Initiate the DOM traversal process. */
-        if (opts.debug) console.time('blast');
-        traverseDOM(elem, opts);
-        if (opts.debug) console.timeEnd('blast');
 
         // ###
         // TODO: Reimplement reversal?
