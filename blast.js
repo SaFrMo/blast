@@ -2,39 +2,10 @@
     Blast.js
 ****************/
 
-/*! Blast.js (2.0.0): julian.com/research/blast (C) 2015 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License */
+/*! Blast.js (2.1.0): julian.com/research/blast (C) 2015 Julian Shapiro. MIT @license: en.wikipedia.org/wiki/MIT_License */
+/*! Vanilla version by Sander Moolin */
 
 ;(function ($, window, document, undefined) {
-
-    /*********************
-       Helper Functions
-    *********************/
-
-    /* IE detection. Gist: https://gist.github.com/julianshapiro/9098609 */
-    var IE = (function () { 
-        if (document.documentMode) {
-            return document.documentMode;
-        } else {
-            for (var i = 7; i > 0; i--) {
-                var div = document.createElement("div");
-
-                div.innerHTML = "<!--[if IE " + i + "]><span></span><![endif]-->";
-
-                if (div.getElementsByTagName("span").length) {
-                    div = null;
-
-                    return i;
-                }
-
-                div = null;
-            }
-        }
-
-        return undefined;
-    })();
-
-    /* Shim to prevent console.log() from throwing errors on IE<=7. */
-    var console = window.console || { log: function () {}, time: function () {} };
 
     /*****************
         Constants
@@ -63,7 +34,7 @@
 
         /*************************
            Punctuation Escaping
-        *************************/ 
+        *************************/
 
         /* Escape likely false-positives of sentence-final periods. Escaping is performed by wrapping a character's ASCII equivalent in double curly brackets,
            which is then reversed (deencodcoded) after delimiting. */
@@ -83,12 +54,12 @@
         function decodePunctuation (text) {
             return text.replace(/{{(\d{1,3})}}/g, function(fullMatch, subMatch) {
                 return String.fromCharCode(subMatch);
-            }); 
+            });
         }
 
         /******************
            DOM Traversal
-        ******************/ 
+        ******************/
 
         function wrapNode (node, opts) {
             var wrapper = document.createElement(opts.tag);
@@ -182,14 +153,14 @@
                     /* Over-increment the loop counter (see below) so that we skip the extra node (middleBit) that we've just created (and already processed). */
                     skipNodeBit = 1;
 
-                    if (!opts.search && opts.delimiter === "sentence") { 
+                    if (!opts.search && opts.delimiter === "sentence") {
                         /* Now that we've forcefully escaped all likely false-positive sentence-final punctuation, we must decode the punctuation back from ASCII. */
                         middleBit.data = decodePunctuation(middleBit.data);
                     }
 
                     /* Create the wrapped node. */
                     var wrappedNode = wrapNode(middleBit, opts, Element.blastedIndex);
-                    /* Then replace the middleBit text node with its wrapped version. */  
+                    /* Then replace the middleBit text node with its wrapped version. */
                     middleBit.parentNode.replaceChild(wrappedNode, middleBit);
 
                     /* Push the wrapper onto the Element.wrappers array (for later use with stack manipulation). */
@@ -200,13 +171,13 @@
                     /* Note: We use this slow splice-then-iterate method because every match needs to be converted into an HTML element node. A text node's text cannot have HTML elements inserted into it. */
                     /* TODO: To improve performance, use documentFragments to delay node manipulation so that DOM queries and updates can be batched across elements. */
                 }
-            /* Traverse the DOM tree until we find text nodes. Skip script and style elements. Skip select and textarea elements since they contain special text nodes that users would not want wrapped. 
+            /* Traverse the DOM tree until we find text nodes. Skip script and style elements. Skip select and textarea elements since they contain special text nodes that users would not want wrapped.
                Additionally, check for the existence of our plugin's class to ensure that we do not retraverse elements that have already been blasted. */
             /* Note: This basic DOM traversal technique is copyright Johann Burkard <http://johannburkard.de>. Licensed under the MIT License: http://en.wikipedia.org/wiki/MIT_License */
-            } else if (node.nodeType === 1 && node.hasChildNodes() && !Reg.skippedElements.test(node.tagName) && !Reg.hasPluginClass.test(node.className)) {  
+            } else if (node.nodeType === 1 && node.hasChildNodes() && !Reg.skippedElements.test(node.tagName) && !Reg.hasPluginClass.test(node.className)) {
                 /* Note: We don't cache childNodes' length since it's a live nodeList (which changes dynamically with the use of splitText() above). */
                 for (var i = 0; i < node.childNodes.length; i++) {
-                    Element.nodeBeginning = true;  
+                    Element.nodeBeginning = true;
 
                     i += traverseDOM(node.childNodes[i], opts);
                 }
@@ -243,14 +214,14 @@
             /* Normalize the string's case for the delimiter switch check below. */
             if (typeof opts.delimiter === "string") {
                 opts.delimiter = opts.delimiter.toLowerCase();
-            }                        
+            }
 
             switch (opts.delimiter) {
                 case "all":
                     /* Matches every character then later sets spaces to "white-space: pre-line" so they don't collapse. */
                     delimiterRegex = /(.)/;
                     break;
-                    
+
                 case "letter":
                 case "char":
                 case "character":
@@ -271,7 +242,7 @@
                     /* Matches phrases either ending in Latin alphabet punctuation or located at the end of the text. (Linebreaks are not considered punctuation.) */
                     /* Note: If you don't want punctuation to demarcate a sentence match, replace the punctuation character with {{ASCII_CODE_FOR_DESIRED_PUNCTUATION}}. ASCII codes: .={{46}}, ?={{63}}, !={{33}} */
                     delimiterRegex = /(?=\S)(([.]{2,})?[^!?]+?([.…!?]+|(?=\s+$)|$)(\s*[′’'”″“")»]+)*)/;
-                    /* RegExp explanation (Tip: Use Regex101.com to play around with this expression and see which strings it matches): 
+                    /* RegExp explanation (Tip: Use Regex101.com to play around with this expression and see which strings it matches):
                        - Expanded view: /(?=\S) ( ([.]{2,})? [^!?]+? ([.…!?]+|(?=\s+$)|$) (\s*[′’'”″“")»]+)* )
                        - (?=\S) --> Match must contain a non-space character.
                        - ([.]{2,})? --> Match may begin with a group of periods.
@@ -306,7 +277,7 @@
 
         /**********************
            Element Iteration
-        **********************/ 
+        **********************/
 
         this.each(function() {
             var $this = $(this),
@@ -317,7 +288,7 @@
 
                 /**********************
                    Element Variables
-                **********************/ 
+                **********************/
 
                 Element = {
                     /* The index of each wrapper element generated by blasting. */
@@ -330,7 +301,7 @@
 
                 /*****************
                    Housekeeping
-                *****************/  
+                *****************/
 
                 /* Unless a consecutive opts.search is being performed, an element's existing Blast call is reversed before proceeding. */
                 if ($this.data(NAME) !== undefined && ($this.data(NAME) !== "search" || opts.search === false)) {
@@ -348,7 +319,7 @@
 
                 /****************
                    Preparation
-                ****************/ 
+                ****************/
 
                 /* Perform optional HTML tag stripping. */
                 if (opts.stripHTMLTags) {
@@ -358,7 +329,7 @@
                 /* If the browser throws an error for the provided element type (browers whitelist the letters and types of the elements they accept), fall back to using "span". */
                 try {
                     document.createElement(opts.tag);
-                } catch (error) { 
+                } catch (error) {
                     opts.tag = "span";
 
                     if (opts.debug) console.log(NAME + ": Invalid tag supplied. Defaulting to span.");
@@ -371,7 +342,7 @@
                 if (opts.debug) console.time(NAME);
                 traverseDOM(this, opts);
                 if (opts.debug) console.timeEnd(NAME);
-            
+
             /* If false is passed in as the first parameter, reverse Blast. */
             } else if (options === false && $this.data(NAME) !== undefined) {
                 reverse($this, opts);
@@ -392,7 +363,7 @@
 
         /************
            Reverse
-        ************/ 
+        ************/
 
         function reverse ($this, opts) {
             if (opts.debug) console.time("blast reversal");
@@ -408,7 +379,7 @@
                         /* Do not reverse Blast on descendant root elements. (Before you can reverse Blast on an element, you must reverse Blast on any parent elements that have been Blasted.) */
                         if (!$this.closest("." + NAME + "-root").length) {
                             var thisParentNode = this.parentNode;
-                            
+
                             /* This triggers some sort of node layout, thereby solving a node normalization bug in <=IE7 for reasons unknown. If you know the specific reason, tweet me: @Shapiro. */
                             if (IE <= 7) (thisParentNode.firstChild.nodeName);
 
@@ -437,7 +408,7 @@
 
         /*************
             Chain
-        *************/ 
+        *************/
 
         /* Either return a stack composed of our call's Element.wrappers or return the element(s) originally targeted by the Blast call. */
         /* Note: returnGenerated can only be disabled on a per-call basis (not a per-element basis). */

@@ -1,16 +1,20 @@
 {
-  "name": "blast-text",
-  "version": "2.0.0",
-  "description": "Blast text apart to make it manipulable.",
+  "name": "blast-vanilla",
+  "version": "2.1.0",
+  "description": "Blast text apart to make it manipulable. No dependencies.",
   "homepage": "http://julian.com/research/blast",
   "license": "MIT",
   "authors": [
     {
       "name": "Julian Shapiro",
       "url": "http://julian.com/"
+    },
+    {
+      "name": "Sander Moolin",
+      "url": "https://sandermoolin.com"
     }
   ],
-  "main": "jquery.blast.js",
+  "main": "blast.js",
   "repository": "julianshapiro/blast",
   "keywords": [
     "text",
@@ -27,8 +31,5 @@
   "files": [
     "jquery.blast.js",
     "jquery.blast.min.js"
-  ],
-  "dependencies": {
-    "jquery": ">= 1.3.0"
-  }
+  ]
 }
