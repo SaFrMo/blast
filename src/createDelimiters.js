@@ -1,4 +1,4 @@
-module.exports.default = function(opts){
+export default function(opts){
     let delimiter = opts.delimiter
     let delimiterRegex
 

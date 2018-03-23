@@ -1,26 +1,24 @@
-##Blast (2.0.0)
+## Blast (2.1.0)
+
+Vanilla version of Blast.js.
 
 **Docs**  
-[julian.com/research/velocity/blast](https://www.julian.com/research/velocity/blast)
+[velocityjs.org/blast/](http://velocityjs.org/blast/)
 
 **Quickstart**
 
 ```sh
-npm install blast-text
+npm install blast-vanilla
 ```
 
-```sh
-bower install blast-text
+```js
+import Blast from 'blast-vanilla'
+
+new Blast('.selector', { /* options */ })
 ```
-
-**Frameworks**  
-Both jQuery and Zepto are fully supported.
-
-**Browsers**  
-All major browsers are supported. Back to IE6.
 
 **Credits**  
-Development sponsored by Stripe: https://stripe.com/blog/open-source-retreat-grantees.
+Based on Blast.js, originally developed by Julian Shapiro.
 
 ====
 

@@ -15,10 +15,10 @@
     }
   ],
   "scripts": {
-      "dev": "NODE_ENV=dev webpack-dev-server --progress --config webpack.config.dev.js --open",
-      "build": "webpack -p --progress --config webpack.config.build.js"  
+    "dev": "NODE_ENV=dev webpack-dev-server --progress --config webpack.config.dev.js --open",
+    "build": "webpack -p --progress --config webpack.config.build.js"
   },
-  "main": "blast.js",
+  "main": "dist/bundle.js",
   "repository": "julianshapiro/blast",
   "keywords": [
     "text",
@@ -35,6 +35,7 @@
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.2",

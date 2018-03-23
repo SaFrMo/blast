@@ -8,7 +8,7 @@ module.exports = Object.assign(webpackConfig, {
     devtool: 'cheap-module-source-map',
 
     output: {
-        library: 'OverlapWatch',
+        library: 'Blast',
         path: path.join(__dirname, 'dist'),
         filename: '[name].js'
     },

@@ -1,4 +1,6 @@
-const createDelimiters = require('./createDelimiters').default
+import createDelimiters from 'createDelimiters'
+import getText from 'getText'
+import processElements from 'processElements'
 
 module.exports = class {
 
@@ -26,16 +28,27 @@ module.exports = class {
             debug: options.debug || false
         }
 
-        // run setup
+        // create delimiters
         const processedDelimiters = this.createDelimiters()
         this.processedDelimiter = processedDelimiters.delimiter
         this.processedDelimiterRegex = processedDelimiters.delimiterRegex
+
+        // map through elements
+        this.processElements()
 
         console.log(this)
 
     }
 
-    createDelimiters(){
-        return createDelimiters(this.opts)
+    createDelimiters(opts = null){
+        return createDelimiters(opts || this.opts)
+    }
+
+    getText(el){
+        return getText(el)
+    }
+
+    processElements(elements = null, opts = null){
+        return processElements(elements || this.elements, opts || this.opts)
     }
 }
