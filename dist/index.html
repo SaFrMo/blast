@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Webpack Boilerplate</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #EA9CB4;
+            font-family: sans-serif;
+            font-weight: 700;
+        }
+        .fixed {
+            position: fixed;
+            background-color: #ffffff;
+            padding: 60px 20px;
+            border-radius: 15px;
+            left: 20px;
+            top: 140px;
+            width: 110px;
+            box-sizing: border-box;
+
+            transition: opacity 0.4s;
+        }
+        .fixed.overlapping {
+            opacity: 0;
+        }
+        .entry {
+            margin-left: 30px;
+            max-width: 500px;
+        }
+        .entry p {
+            margin: 30px 30px 30px 150px;
+        }
+        .hidden {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="fixed">
+          I'm fixed.
+        </div>
+
+        <div class="entry">
+            <p>First paragraph</p>
+            <p>Second paragraph</p>
+        </div>
+    </div>
+
+    <!-- place content you want to go before the contents of bundle.js here -->
+    <!-- for example, any dependencies you don't want bundled into bundle.js -->
+
+
+
+    <!-- end pre-bundle.js area -->
+
+<script type="text/javascript" src="bundle.js"></script></body>
+
+<!-- place content you want to run after bundle.js here -->
+<!-- for example, code to test the contents of bundle.js -->
+
+<script>
+    new Blast('.entry p')
+</script>
+
+<!-- end post-bundle.js area -->
+
+</html>
