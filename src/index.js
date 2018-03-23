@@ -1,7 +1,7 @@
-import createDelimiters from 'createDelimiters'
-import getText from 'getText'
-import processElements from 'processElements'
-import traverseDOM from 'traverseDOM'
+import createDelimiters from './createDelimiters'
+import getText from './getText'
+import processElements from './processElements'
+import traverseDOM from './traverseDOM'
 
 module.exports = class {
 

@@ -1,5 +1,5 @@
-import { encodePunctuation, decodePunctuation, Reg } from 'utils'
-import wrapNode from 'wrapNode'
+import { encodePunctuation, decodePunctuation, Reg } from './utils'
+import wrapNode from './wrapNode'
 
 function traverseDOM (node, opts) {
     let matchPosition = -1

@@ -1,4 +1,4 @@
-import getText from 'getText'
+import getText from './getText'
 
 export default (elements, opts) => {
     return elements.map(elem => {
