@@ -1,6 +1,6 @@
 {
   "name": "blast-vanilla",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Blast text apart to make it manipulable. No dependencies.",
   "homepage": "http://julian.com/research/blast",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "dev": "NODE_ENV=dev webpack-dev-server --progress --config webpack.config.dev.js --open",
     "build": "webpack -p --progress --config webpack.config.build.js"
   },
-  "main": "src/index.js",
+  "main": "dist/blast.min.js",
   "repository": "safrmo/blast",
   "keywords": [
     "text",
