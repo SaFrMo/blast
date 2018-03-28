@@ -3,7 +3,7 @@ import getText from './getText'
 import processElements from './processElements'
 import traverseDOM from './traverseDOM'
 
-module.exports = class {
+export default class {
 
     constructor(el, options = {}){
 
