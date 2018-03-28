@@ -57,9 +57,6 @@ export default class {
         })
         if (this.opts.debug) console.timeEnd('blast');
 
-
-        console.log(this)
-
     }
 
     createDelimiters(opts = null){
